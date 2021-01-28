@@ -295,15 +295,15 @@ class Token:
         )
 
     def setId(self, IdMap):
-        self.scope = IdMap[self.scopeId]
-        self.link = IdMap[self.linkId]
-        self.variable = IdMap[self.variableId]
-        self.function = IdMap[self.functionId]
-        self.values = IdMap[self.valuesId]
-        self.typeScope = IdMap[self.typeScopeId]
-        self.astParent = IdMap[self.astParentId]
-        self.astOperand1 = IdMap[self.astOperand1Id]
-        self.astOperand2 = IdMap[self.astOperand2Id]
+        self.scope = IdMap[self.scopeId] if self.scopeId in IdMap else None
+        self.link = IdMap[self.linkId] if self.linkId in IdMap else None
+        self.variable = IdMap[self.variableId] if self.variableId in IdMap else None
+        self.function = IdMap[self.functionId] if self.functionId in IdMap else None
+        self.values = IdMap[self.valuesId] if self.valuesId in IdMap else None
+        self.typeScope = IdMap[self.typeScopeId] if self.typeScopeId in IdMap else None
+        self.astParent = IdMap[self.astParentId] if self.astParentId in IdMap else None
+        self.astOperand1 = IdMap[self.astOperand1Id] if self.astOperand1Id in IdMap else None
+        self.astOperand2 = IdMap[self.astOperand2Id] if self.astOperand2Id in IdMap else None
         if self.valueType:
             self.valueType.setId(IdMap)
 
@@ -390,12 +390,13 @@ class Scope:
         )
 
     def setId(self, IdMap):
-        self.bodyStart = IdMap[self.bodyStartId]
-        self.bodyEnd = IdMap[self.bodyEndId]
-        self.nestedIn = IdMap[self.nestedInId]
-        self.function = IdMap[self.functionId]
+        self.bodyStart = IdMap[self.bodyStartId] if self.bodyStartId in IdMap else None
+        self.bodyEnd = IdMap[self.bodyEndId] if self.bodyEndId in IdMap else None
+        self.nestedIn = IdMap[self.nestedInId] if self.nestedInId in IdMap else None
+        self.function = IdMap[self.functionId] if self.functionId in IdMap else None
         for v in self.varlistId:
-            self.varlist.append(IdMap[v])
+            val = IdMap[v] if v in IdMap else None
+            self.varlist.append(val)
 
 
 class Function:
@@ -537,10 +538,10 @@ class Variable:
         )
 
     def setId(self, IdMap):
-        self.nameToken = IdMap[self.nameTokenId]
-        self.typeStartToken = IdMap[self.typeStartTokenId]
-        self.typeEndToken = IdMap[self.typeEndTokenId]
-        self.scope = IdMap[self.scopeId]
+        self.nameToken = IdMap[self.nameTokenId] if self.nameTokenId in IdMap else None
+        self.typeStartToken = IdMap[self.typeStartTokenId] if self.typeStartTokenId in IdMap else None
+        self.typeEndToken = IdMap[self.typeEndTokenId] if self.typeEndTokenId in IdMap else None
+        self.scope = IdMap[self.scopeId] if self.scopeId in IdMap else None
 
 
 class Value:
