@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #
 # MISRA C 2012 checkers
 #
@@ -1024,7 +1024,7 @@ def misra_21_11(data):
 def loadRuleTexts(filename):
     num1 = 0
     num2 = 0
-    for line in open(filename, 'rt'):
+    for line in open(filename, 'rt', encoding="utf-8"):
         line = line.replace('\r', '').replace('\n', '')
         res = re.match(r'^Rule ([0-9]+).([0-9]+)', line)
         if res:
