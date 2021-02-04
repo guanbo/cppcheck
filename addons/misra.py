@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 #
 # MISRA C 2012 checkers
 #
@@ -32,7 +32,7 @@ def reportError(location, num1, num2):
             errmsg = ruleTexts[num] + ' [' + id + ']'
         else:
             errmsg = 'misra violation (use --rule-texts=<file> to get proper output) [' + id + ']'
-        sys.stderr.write('[' + location.file + ':' + str(location.linenr) + '] ' + errmsg + '\n')
+        sys.stderr.write('[' + location.file + ':' + str(location.linenr) + ':' + str(location.column) + '] ' + errmsg + '\n')
 
 
 def simpleMatch(token, pattern):
@@ -1024,7 +1024,7 @@ def misra_21_11(data):
 def loadRuleTexts(filename):
     num1 = 0
     num2 = 0
-    for line in open(filename, 'rt', encoding="utf-8"):
+    for line in open(filename, 'rt'):
         line = line.replace('\r', '').replace('\n', '')
         res = re.match(r'^Rule ([0-9]+).([0-9]+)', line)
         if res:
